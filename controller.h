@@ -13,13 +13,16 @@ public:
                                 UpperCaseFacade *facade,
                                 QObject *parent = nullptr)
       : QObject(parent), main_window_(main_window), facade_(facade) {
-    connect(main_window_->open_, SIGNAL(clicked(bool)), this, SLOT(Operate()));
+    connect(main_window_->open_, SIGNAL(clicked(bool)), this, SLOT(Open()));
+    connect(main_window_->parse_bttn_, SIGNAL(clicked(bool)), this,
+            SLOT(Operate()));
     connect(main_window_->save_, SIGNAL(clicked(bool)), this, SLOT(Save()));
   }
 
 public slots:
-  void Operate();
+  void Open();
   void Save();
+  void Operate();
 
 private:
   MainWindow *main_window_;

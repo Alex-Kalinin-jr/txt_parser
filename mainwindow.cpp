@@ -26,12 +26,12 @@ MainWindow::MainWindow(QWidget *parent)
   centralWidget()->setLayout(layout);
 
   open_ = new QPushButton(tr("Open"), this);
-  save_ = new QPushButton(tr("Save"), this);
   parse_bttn_ = new QPushButton(tr("Parse"), this);
+  save_ = new QPushButton(tr("Save"), this);
 
   layout->addWidget(open_, 0, 0, 1, 1);
-  layout->addWidget(save_, 0, 1, 1, 1);
-  layout->addWidget(parse_bttn_, 0, 2, 1, 1);
+  layout->addWidget(parse_bttn_, 0, 1, 1, 1);
+  layout->addWidget(save_, 0, 2, 1, 1);
 }
 
 MainWindow::~MainWindow() { delete ui; }

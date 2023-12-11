@@ -4,8 +4,9 @@
 
 bool UpperCaseFacade::ReadFile(const std::string &file_path) {
   TextFileHandler handler(file_path);
-  content_ = handler.ReadFile();
-  std::cout << "content read" << std::endl;
+  LinkedList<std::string> content = handler.ReadFile();
+  content_ = content;
+  content_.Display();
   return true;
 }
 
