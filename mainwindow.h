@@ -15,8 +15,6 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
-public slots:
-
 public:
   MainWindow(QWidget *parent = nullptr);
   QPushButton *parse_bttn_;
@@ -24,8 +22,8 @@ public:
   QPushButton *save_;
   ~MainWindow();
 
-  QString &OpenFile();
-  QString &SaveFile();
+  QString OpenFile();
+  QString SaveFile();
 
 private:
   Ui::MainWindow *ui;
