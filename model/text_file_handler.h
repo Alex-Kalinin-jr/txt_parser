@@ -12,7 +12,7 @@ public:
 
   LinkedList<std::string> ReadFile();
 
-  // void WriteFile(const LinkedList<std::string> &);
+  void WriteFile(const LinkedList<std::pair<std::string, int>> &content);
 
 private:
   std::string file_path;

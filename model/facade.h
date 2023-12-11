@@ -13,6 +13,7 @@ public:
 
 private:
   LinkedList<std::string> content_;
+  LinkedList<std::pair<std::string, int>> sorted_content_;
 };
 
 #endif // THIS_PROJECT_FACADE_H

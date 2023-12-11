@@ -4,20 +4,16 @@
 
 bool UpperCaseFacade::ReadFile(const std::string &file_path) {
   TextFileHandler handler(file_path);
-  LinkedList<std::string> content = handler.ReadFile();
-  content_ = content;
-  content_.Display();
+  content_ = handler.ReadFile();
   return true;
 }
 
 bool UpperCaseFacade::Handlefile() {
-  content_.Sort();
-  content_.Display();
+  sorted_content_ = content_.DoubleCriteriaSort();
   return true;
 }
 
 bool UpperCaseFacade::WriteFile(std::string &filename) const {
   TextFileHandler handler(filename);
-  //  handler.Writefile();
-  std::cout << "handler opened" << std::endl;
+  handler.WriteFile(sorted_content_);
 }

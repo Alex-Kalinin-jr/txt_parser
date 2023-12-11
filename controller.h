@@ -11,13 +11,7 @@ class MainWindowController : public QObject {
 public:
   explicit MainWindowController(MainWindow *main_window,
                                 UpperCaseFacade *facade,
-                                QObject *parent = nullptr)
-      : QObject(parent), main_window_(main_window), facade_(facade) {
-    connect(main_window_->open_, SIGNAL(clicked(bool)), this, SLOT(Open()));
-    connect(main_window_->parse_bttn_, SIGNAL(clicked(bool)), this,
-            SLOT(Operate()));
-    connect(main_window_->save_, SIGNAL(clicked(bool)), this, SLOT(Save()));
-  }
+                                QObject *parent = nullptr);
 
 public slots:
   void Open();
