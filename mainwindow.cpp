@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
   layout->addWidget(open_, 0, 0, 1, 1);
   layout->addWidget(parse_bttn_, 0, 1, 1, 1);
   layout->addWidget(save_, 0, 2, 1, 1);
+
+  adjustSize();
 }
+
+void MainWindow::Notify(QString msg) { statusBar()->showMessage(msg); }
 
 MainWindow::~MainWindow() { delete ui; }

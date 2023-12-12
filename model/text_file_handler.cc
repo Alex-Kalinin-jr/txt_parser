@@ -12,8 +12,8 @@ LinkedList<std::string> TextFileHandler::ReadFile() {
   if (file.is_open()) {
     std::string word;
     char c;
-    while (file >> c) {
-      if (std::isupper(c)) {
+    while (file.get(c)) {
+      if (c >= 65 && c <= 90) {
         word += c;
       } else {
         if (!word.empty()) {

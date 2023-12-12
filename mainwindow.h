@@ -20,10 +20,12 @@ public:
   QPushButton *parse_bttn_;
   QPushButton *open_;
   QPushButton *save_;
-  ~MainWindow();
 
+  void Notify(QString msg);
   QString OpenFile();
   QString SaveFile();
+
+  ~MainWindow();
 
 private:
   Ui::MainWindow *ui;
