@@ -17,3 +17,11 @@ bool UpperCaseFacade::WriteFile(std::string &filename) const {
   TextFileHandler handler(filename);
   handler.WriteFile(sorted_content_);
 }
+
+//| - content_: LinkedList<std::string> |
+//| - sorted_content_: LinkedList<std::pair<std::string, int>> |
+//+-------------------------------------+
+//| + UpperCaseFacade()                  |
+//| + ReadFile(const std::string&): bool |
+//| + HandleFile(): bool                 |
+//| + WriteFile(std::string&): bool      |

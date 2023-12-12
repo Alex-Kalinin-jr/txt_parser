@@ -104,45 +104,6 @@ public:
 
   void Sort() { QuickSort(head_, tail_); }
 
-  // for second iteration sorting. sorts pairs by count descending and within
-  // the same count - by alphabet ascending
-  void SortPairs() {
-    if constexpr (std::is_same_v<T, std::pair<std::string, int>>) {
-      QuickSortDescending(head_, tail_);
-    }
-  }
-
-  // be careful for right work of this function there should be sorted list in
-  // input
-  LinkedList<std::pair<std::string, int>>
-  Accumulate(const LinkedList<std::string> &sortedList) {
-    LinkedList<std::pair<std::string, int>> wordCounts;
-
-    Node<std::string> *current = sortedList.head_;
-    std::string currentWord = "";
-    int count = 0;
-
-    while (current != nullptr) {
-      if (currentWord != current->data_) {
-        if (!currentWord.empty()) {
-          wordCounts.PushBack(std::make_pair(currentWord, count));
-        }
-        currentWord = current->data_;
-        count = 1;
-      } else {
-        ++count;
-      }
-
-      current = current->next_;
-    }
-
-    if (!currentWord.empty()) {
-      wordCounts.PushBack(std::make_pair(currentWord, count));
-    }
-
-    return wordCounts;
-  }
-
 private:
   Node<T> *head_;
   Node<T> *tail_;
@@ -208,6 +169,83 @@ private:
     std::swap(i->data_, high->data_);
     return i;
   }
+
+  // for second iteration sorting. sorts pairs by count descending and within
+  // the same count - by alphabet ascending
+  void SortPairs() {
+    if constexpr (std::is_same_v<T, std::pair<std::string, int>>) {
+      QuickSortDescending(head_, tail_);
+    }
+  }
+
+  // be careful: for right work of this function there should be SORTED list as
+  // input.(there is not UB, but result would be wrong otherwise)
+  LinkedList<std::pair<std::string, int>>
+  Accumulate(const LinkedList<std::string> &sorted_list) {
+    LinkedList<std::pair<std::string, int>> word_counts;
+
+    Node<std::string> *current = sorted_list.head_;
+    std::string current_word = "";
+    int count = 0;
+
+    while (current != nullptr) {
+      if (current_word != current->data_) {
+        if (!current_word.empty()) {
+          word_counts.PushBack(std::make_pair(current_word, count));
+        }
+        current_word = current->data_;
+        count = 1;
+      } else {
+        ++count;
+      }
+
+      current = current->next_;
+    }
+
+    if (!current_word.empty()) {
+      word_counts.PushBack(std::make_pair(current_word, count));
+    }
+
+    return word_counts;
+  }
 };
 
 #endif // THIS_PROJECT_LIST_H
+
+//+---------------------------------+
+//    |            Node<T>              |
+//    +---------------------------------+
+//    | - data_: T                      |
+//             | - next_: Node<T>*               |
+//             | - prev_: Node<T>*               |
+//             +---------------------------------+
+//             | + Node(T)                       |
+//             +---------------------------------+
+
+//                                                               +---------------------------------------+
+//             |           LinkedList<T>                |
+//             +---------------------------------------+
+//             | - head_: Node<T>*                      |
+//             | - tail_: Node<T>*                      |
+//             | - size_: int                           |
+//             +---------------------------------------+
+//             | + LinkedList()                         |
+//             | + ~LinkedList()                        |
+//             | + LinkedList(const LinkedList&)        |
+//             | + LinkedList(LinkedList&&) noexcept    |
+//             | + operator=(const LinkedList&)         |
+//             | + operator=(LinkedList&&) noexcept     |
+//             | + Display(std::ofstream&) const        |
+//             | + get_size() const                     |
+//             | + PushBack(T)                          |
+//             | + DoubleCriteriaSort()                 |
+//             | + Sort()                               |
+//             - - - - - - - - - - - - - - - - - - - - -
+//             | - Clear()                              |
+//             | - QuickSort(Node<T>*, Node<T>*)        |
+//             | - Partition(Node<T>*, Node<T>*)        |
+//             | - QuickSortDescending(Node<T>*, Node<T>*) |
+//             | - PartitionDescending(Node<T>*, Node<T>*) |
+//             | - SortPairs()                          |
+//             | - Accumulate(const LinkedList<std::string>&) |
+//             +---------------------------------------+
