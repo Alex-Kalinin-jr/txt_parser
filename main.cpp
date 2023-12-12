@@ -5,10 +5,15 @@
 #include "controller.h"
 
 int main(int argc, char *argv[]) {
-  QApplication a(argc, argv);
-  MainWindow window;
-  UpperCaseFacade facade;
-  MainWindowController controller(&window, &facade, nullptr);
-  window.show();
+  try {
+    QApplication a(argc, argv);
+    MainWindow window;
+    UpperCaseFacade facade;
+    MainWindowController controller(&window, &facade, nullptr);
+    window.show();
+  } catch (const std::exception &e) {
+    ExceptionHandler::getInstance().HandleException(e);
+  }
+
   return a.exec();
 }
