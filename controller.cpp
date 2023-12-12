@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "controller.h"
+#include "exception_handler.h"
 #include "model/facade.h"
 
 MainWindowController::MainWindowController(MainWindow *main_window,
@@ -18,7 +19,8 @@ void MainWindowController::Open() {
     QString filename = main_window_->OpenFile();
     facade_->ReadFile(filename.toStdString());
     main_window_->Notify("File was opened and read");
-  } catch (...) {
+  } catch (const std::exception &e) {
+    ExceptionHandler::getInstance().HandleException(e);
     main_window_->Notify("Some errors occur while open and read file");
   }
 }
@@ -27,7 +29,8 @@ void MainWindowController::Operate() {
   try {
     facade_->Handlefile();
     main_window_->Notify("File was parsed and sorted");
-  } catch (...) {
+  } catch (const std::exception &e) {
+    ExceptionHandler::getInstance().HandleException(e);
     main_window_->Notify("Some errors occur during data parsing");
   }
 }
@@ -37,7 +40,8 @@ void MainWindowController::Save() {
     std::string filename = main_window_->SaveFile().toStdString();
     facade_->WriteFile(filename);
     main_window_->Notify("File was saved");
-  } catch (...) {
+  } catch (const std::exception &e) {
+    ExceptionHandler::getInstance().HandleException(e);
     main_window_->Notify("Some errors occured during data saving");
   }
 }

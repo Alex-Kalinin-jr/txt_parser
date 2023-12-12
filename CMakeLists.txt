@@ -29,6 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         model/text_file_handler.cc
         model/text_file_handler.h
         controller.h controller.cpp
+        exception_handler.h exception_handler.cpp
     )
 
 else()
